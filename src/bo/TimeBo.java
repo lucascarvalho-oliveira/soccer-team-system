@@ -4,18 +4,18 @@ import dao.TimeDao;
 import model.Jogador;
 import model.Time;
 
-public class TimeBO {
-    private TimeDao timeDao;
+public class TimeBo {
+    private TimeDao timedao;
 
-    public TimeBO(){
-        this.timeDao = new TimeDao();
+    public TimeBo(TimeDao timedao) {
+        this.timedao = timedao;
     }
 
     public void salvarTime(Time time) throws Exception {
         if(time.getNome() == null || time.getNome().trim().isEmpty()){
             throw new IllegalArgumentException("Nome do time invalido");
         }
-        if(time.getIdentificador() < 100 || time.getIdentificador() > 200){
+        if(time.getIdentificador() < 100){
             throw new IllegalArgumentException("Identificador incorreto");
         }
 
@@ -31,6 +31,6 @@ public class TimeBO {
             }
         }
 
-        timeDao.salvarTime(time);
+        timedao.salvarTime(time);
     }
 }

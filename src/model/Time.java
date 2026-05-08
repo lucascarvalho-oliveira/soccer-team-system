@@ -15,19 +15,32 @@ public class Time {
         this.jogadores = new ArrayList<>();
     }
 
-    public int getIdentificador(){
-        return identificador;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getNome(){
+    public void setIdentificador(int identificador) {
+        this.identificador = identificador;
+    }
+
+    public void setJogadores(List<Jogador> jogadores) {
+        this.jogadores = jogadores;
+    }
+
+    public String getNome() {
         return nome;
     }
 
-    public void addList(Jogador jogador){
-        jogadores.add(jogador);
+    public int getIdentificador() {
+        return identificador;
     }
 
-    public List<Jogador> getJogadores(){
+    public List<Jogador> getJogadores() {
         return jogadores;
+    }
+
+    @Override
+    public String toString() {
+        return "\nJogadores " + jogadores;
     }
 }

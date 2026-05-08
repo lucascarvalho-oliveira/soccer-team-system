@@ -3,9 +3,8 @@ package model;
 public class Atacante extends Jogador{
     private int nro_gols;
 
-    public Atacante(String nome, String dataNascimento, int nro_gols){
+    public Atacante(int nro_gols, String nome, String dataNascimento) {
         super(nome, dataNascimento);
-
         this.nro_gols = nro_gols;
     }
 
@@ -15,7 +14,12 @@ public class Atacante extends Jogador{
     }
 
     @Override
-    public String toString(){
+    public String pocisao(){
+        return "Atacante";
+    }
+
+    @Override
+    public String toString() {
         return "Atacante;" + nome + ";" + dataNascimento + ";" + nro_gols;
     }
 }

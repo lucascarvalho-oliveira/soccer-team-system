@@ -13,21 +13,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TimeDao {
-
     public void salvarTime(Time time){
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("Time.txt", true))){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("Time.txt"))){
 
             String linha = time.getIdentificador() + ";" + time.getNome() + ";";
 
-            for(Jogador j: time.getJogadores()){
-                linha += j.toString() + "|";
+            for(Jogador jogador: time.getJogadores()){
+                        linha += jogador.toString() + "|";
             }
 
             writer.write(linha);
             writer.newLine();
 
         }catch(Exception e){
-            e.printStackTrace();
+                    e.printStackTrace();
         }
     }
 
@@ -38,10 +37,10 @@ public class TimeDao {
             String linha;
 
             while((linha = reader.readLine()) != null){
-                String[] partes = linha.split(";");
+                String[] partes = linha.split(";", 3);
 
                 if(partes.length >= 2){
-                    int id = Integer.parseInt(partes[0]);
+                    int id = Integer.parseInt(partes[0].trim());
                     String nome = partes[1];
 
                     Time time = new Time(nome, id);
@@ -53,13 +52,13 @@ public class TimeDao {
                             if(dados.isEmpty()) continue;
 
                             String[] d = dados.split(";");
-                            String tipo = d[0];
+                            String tipo = d[0].trim();
 
                             if(tipo.equals("Atacante")){
-                                time.getJogadores().add(new Atacante(d[1], d[2], Integer.parseInt(d[3])));
+                                time.getJogadores().add(new Atacante(Integer.parseInt(d[3]), d[1], d[2]));
                             }
                             if(tipo.equals("Goleiro")){
-                                time.getJogadores().add(new Goleiro(d[1], d[2], Integer.parseInt(d[3])));
+                                time.getJogadores().add(new Goleiro(Integer.parseInt(d[3]), d[1], d[2]));
                             }
                         }
                     }
@@ -70,5 +69,24 @@ public class TimeDao {
             System.out.println(e.getMessage());
         }
         return mapaTime;
+    }
+
+    public void reescreverArquivo(Map<Integer, Time> mapa){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("Time.txt"))){
+
+            for(Time time : mapa.values()){
+                String linha = time.getIdentificador() + ";" + time.getNome() + ";";
+
+                for(Jogador jogador: time.getJogadores()){
+                    linha += jogador.toString() + "|";
+                }
+
+                writer.write(linha);
+                writer.newLine();
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

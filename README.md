@@ -74,7 +74,7 @@ src/
 ### Clonar Repositório
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
+git clone <(https://github.com/lucascarvalho-oliveira/soccer-team-system.git)>
 ```
 
 ### Executar

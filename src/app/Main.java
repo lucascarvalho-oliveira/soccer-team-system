@@ -14,13 +14,14 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         TimeDao dao = new TimeDao();
-        int menu = -1;
+        boolean sair = false;
 
-        while(menu != 3){
-            System.out.println("1 - Adicionar time");
-            System.out.println("2 - remover time");
-            System.out.println("3 - sair");
-            menu = sc.nextInt();sc.nextLine();
+        while(!sair){
+            System.out.println("1 - Adicionar time:");
+            System.out.println("2 - Consultar por identificador:");
+            System.out.println("3 - remover time:");
+            System.out.println("4 - sair:");
+            int menu = sc.nextInt();sc.nextLine();
             System.out.println();
 
             try{
@@ -78,10 +79,10 @@ public class Main {
 
                         break;
 
-                   case 2:
+                    case 2:
                         System.out.println("Digite o código do time para a consulta:");
                         int busca = sc.nextInt();sc.nextLine();
-                       System.out.println();
+                        System.out.println();
 
                         Map<Integer, Time> mapa = dao.buscarTime();
 
@@ -99,13 +100,33 @@ public class Main {
                             break;
                         }
 
+                    case 3:
+                        System.out.println("Digite o código do time para a consulta:");
+                        int buscaId = sc.nextInt();sc.nextLine();
+                        System.out.println();
+
+
+                        Map<Integer, Time> mapaDelete = dao.buscarTime();
+
+                        if(mapaDelete.containsKey(buscaId)){
+                            Time t = mapaDelete.get(buscaId);
+                            System.out.println("Time encontrado");
+                            System.out.println("nome: " + t.getNome());
+                            System.out.println();
+                        }else{
+                            System.out.println("Time com código " + buscaId + " não encontrado.");
+                            System.out.println();
+                            break;
+                        }
+
                         System.out.println("Deseja apagar ?");
                         System.out.println("1 - sim | 2 - nao");
                         int escolha = sc.nextInt();sc.nextLine();
+                        System.out.println();
 
                         if(escolha == 1){
-                            mapa.remove(busca);
-                            dao.reescreverArquivo(mapa);
+                            mapaDelete.remove(buscaId);
+                            dao.reescreverArquivo(mapaDelete);
                             System.out.println("Time removido com sucesso");
                             System.out.println();
                         }else{
@@ -115,8 +136,13 @@ public class Main {
                         }
                         break;
 
+                    case 4:
+                        System.out.println("Encerrando sistema...");
+                        sair = true;
+                        break;
+
                     default:
-                        System.out.println("Opção inválida ou número não encontrado!");
+                        System.out.println("Opção inválida!");
                         System.out.println();
                         break;
                 }

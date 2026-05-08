@@ -1,13 +1,12 @@
 package app;
 
-import bo.TimeBo;
+import service.TimeService;
 import dao.TimeDao;
 import model.Atacante;
 import model.Goleiro;
 import model.Jogador;
 import model.Time;
 
-import java.sql.SQLOutput;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -65,7 +64,7 @@ public class Main {
                             System.out.println();
                         }
 
-                        TimeBo bo = new TimeBo(dao);
+                        TimeService bo = new TimeService(dao);
 
                         try{
                             System.out.println("Validando...");

@@ -1,13 +1,13 @@
-package bo;
+package service;
 
 import dao.TimeDao;
 import model.Jogador;
 import model.Time;
 
-public class TimeBo {
+public class TimeService {
     private TimeDao timedao;
 
-    public TimeBo(TimeDao timedao) {
+    public TimeService(TimeDao timedao) {
         this.timedao = timedao;
     }
 
